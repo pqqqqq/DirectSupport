@@ -2,7 +2,7 @@ package com.pqqqqq.directsupport;
 
 import com.google.inject.Inject;
 import com.pqqqqq.directchat.DirectChat;
-import com.pqqqqq.directsupport.commands.CommandDirectSupport;
+import com.pqqqqq.directsupport.commands.*;
 import com.pqqqqq.directsupport.events.CoreEvents;
 import com.pqqqqq.directsupport.ticket.Ticket;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -15,6 +15,7 @@ import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.service.command.CommandService;
 import org.spongepowered.api.service.config.DefaultConfig;
 import org.spongepowered.api.service.event.EventManager;
+import org.spongepowered.api.util.command.dispatcher.SimpleDispatcher;
 
 import java.io.File;
 
@@ -58,9 +59,27 @@ public class DirectSupport {
         plugin = this;
         game = event.getGame();
 
-        // Register commands
+        // Register commands to dispatcher.
+        SimpleDispatcher simpleDispatcher = new SimpleDispatcher();
+        simpleDispatcher.register(new CommandReload(this), "reload");
+        simpleDispatcher.register(new CommandClear(this), "clear");
+        simpleDispatcher.register(new CommandInfo(this), "info");
+        simpleDispatcher.register(new CommandDelete(this), "delete", "remove");
+        simpleDispatcher.register(new CommandHelpers(this), "helpers", "ops", "admins", "mods");
+        simpleDispatcher.register(new CommandList(this), "list", "active", "activet");
+        simpleDispatcher.register(new CommandAll(this), "all", "completed");
+        simpleDispatcher.register(new CommandView(this), "view");
+        simpleDispatcher.register(new CommandCreate(this), "create", "c");
+        simpleDispatcher.register(new CommandAccept(this), "accept", "a");
+        simpleDispatcher.register(new CommandLeave(this), "leave");
+        simpleDispatcher.register(new CommandGoto(this), "goto", "tp", "tele", "teleport");
+        simpleDispatcher.register(new CommandSay(this), "say");
+        simpleDispatcher.register(new CommandSelect(this), "select", "s");
+        simpleDispatcher.register(new CommandTakeover(this), "takeover");
+
+        // Register dispatcher to main command service.
         CommandService cmdService = game.getCommandDispatcher();
-        cmdService.register(this, new CommandDirectSupport(this), "ds", "directsupport", "ticket", "help");
+        cmdService.register(this, simpleDispatcher, "ds", "directsupport", "ticket", "help");
 
         // Register events
         EventManager eventManager = game.getEventManager();
