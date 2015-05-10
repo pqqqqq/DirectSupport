@@ -1,0 +1,96 @@
+DirectSupport - A DirectChat hook that utilizes private channels to allows "helpers" and ordinary players to converse privately for help.
+Throughout this documentation, arguments enclosed in <> are necessary, whereas arguments in [] are optional. If a ... is place in an argument (e.g <message ...>), then that argument extends for the rest of the command, including any spaces.
+
+Commands:
+All commands are branched off of the main directsupport command (/ds, /directsupport, /ticket, /help)
+
+Reload:
+	Command aliases: /ds reload
+	What it does: Reloads the config, but does not remove any tickets.
+	Usage: /ds reload
+	Permissions: ds.reload OR ds.admin
+	Player only: No
+Clear:
+	Command aliases: /ds clear
+	What it does: Clears ALL tickets, including active ones.
+	Usage: /ds clear
+	Permissions: ds.clear OR ds.admin
+	Player only: No
+Info:
+	Command aliases: /ds info
+	What it does: Prints info about the specified ticket.
+	Usage: /ds info <ticket#>
+	Permissions: ds.info OR ds.mod OR ds.admin
+	Player only: No
+Delete:
+	Command aliases: /ds delete, /ds remove, /ds terminate
+	What it does: Forcibly deletes an active ticket.
+	Usage: /ds delete <ticket#L
+	Permissions: ds.delete OR ds.admin
+	Player only: No
+Helpers:
+	Command aliases: /ds helpers, /ds mods, /ds ops
+	What it does: Prints a list of "helpers" who have the permissions necessary to help with tickets.
+	Usage: /ds helpers
+	Permissions: None
+	Player only: No
+List:
+	Command aliases: /ds list, /ds active, /ds activet
+	What it does: Prints a list of active tickets for helpers in which they can be easily be clicked and accepted.
+	Usage: /ds list [page#]
+	Permissions: ds.list OR ds.mod OR ds.admin
+	Player only: No, but recommended (to click easily).
+All:
+	Command aliases: /ds all, /ds completed
+	What it does: Prints a list of all tickets currently in record.
+	Usage: /ds all [page#]
+	Permissions: ds.completed OR ds.mod OR ds.admin
+	Player only: No
+View:
+	Command aliases: /ds view
+	What it does: Prints out the conversation pertaining to this ticket.
+	Usage: /ds view <ticket#> [page#]
+	Permissions: ds.view OR ds.admin
+	Player only: No
+Create:
+	Command aliases: /ds create OR /ds c
+	What it does: Creates a ticket and requests help from a helper.
+	Usage: /ds create <message ...>
+	Permissions: None
+	Player only: Yes
+Accept:
+	Command aliases: /ds accept, /ds a, /ds join
+	What it does: Accepts a ticket and sets up a private channel to help the player in need.
+	Usage: /ds accept [ticket#]
+	Permissions: ds.accept OR ds.mod OR ds.admin
+	Player only: Yes
+Leave:
+	Command aliases: /ds leave
+	What it does: Leaves the current ticket the player is in, thereby marking the ticket as complete.
+	Usage: /ds leave
+	Permissions: None
+	Player only: Yes
+Goto:
+	Command aliases: /ds goto, /ds tele, /ds tp, /ds teleport
+	What it does: Teleports a helper to the location at which the ticket was created.
+	Usage: /ds goto <ticket#>
+	Permissions: ds.goto OR ds.mod OR ds.admin
+	Player only: Yes
+Say:
+	Command aliases: /ds say OR /ds speak
+	What it does: Allows an admin to speak directly into an active ticket's private channel.
+	Usage: /ds say <ticket#> <message ...>
+	Permissions: ds.say OR ds.admin
+	Player only: Yes
+Select:
+	Command aliases: /ds select OR /ds s
+	What it does: Selects the current ticket as the active speaking channel.
+	Usage: /ds select
+	Permissions: None
+	Player only: Yes
+Takeover:
+	Command aliases: /ds takeover
+	What it does: Takes over the ticket as the new helper.
+	Usage: /ds takeover <ticket#>
+	Permissions: ds.takeover OR ds.admin
+	Player only: Yes
