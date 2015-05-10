@@ -1,17 +1,14 @@
 package com.pqqqqq.directsupport.commands;
 
 import com.google.common.base.Optional;
-import com.pqqqqq.directchat.channel.Channel;
 import com.pqqqqq.directchat.channel.member.Member;
 import com.pqqqqq.directchat.util.Utilities;
 import com.pqqqqq.directsupport.Config;
 import com.pqqqqq.directsupport.DirectSupport;
 import com.pqqqqq.directsupport.ticket.Ticket;
-import com.pqqqqq.directsupport.ticket.channel.TicketChannel;
 import com.pqqqqq.directsupport.util.pagination.PaginatedList;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.TextBuilder;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
