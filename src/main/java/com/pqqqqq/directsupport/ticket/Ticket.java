@@ -1,9 +1,7 @@
 package com.pqqqqq.directsupport.ticket;
 
 import com.pqqqqq.directchat.DirectChat;
-import com.pqqqqq.directchat.channel.Channel;
 import com.pqqqqq.directchat.channel.member.Member;
-import com.pqqqqq.directchat.util.Utilities;
 import com.pqqqqq.directsupport.Config;
 import com.pqqqqq.directsupport.DirectSupport;
 import com.pqqqqq.directsupport.ticket.channel.TicketChannel;
