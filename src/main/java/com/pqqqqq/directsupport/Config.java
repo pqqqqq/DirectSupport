@@ -43,12 +43,14 @@ public class Config {
         try {
             CommentedConfigurationNode root = cfg.load();
 
-            CommentedConfigurationNode tickets = root.getNode("tickets");
-            messageFormat = Utilities.formatColours(tickets.getNode("format", "message").getString("&3[DS -> %OTHER%] &b%PLAYERNAME%: &f%MESSAGE%"));
-            sayIntoFormat = Utilities.formatColours(tickets.getNode("format", "say-into").getString("&3[DS Admin] &b%PLAYERNAME%: &f%MESSAGE%"));
-            dateFormat = new SimpleDateFormat(tickets.getNode("format", "date").getString("EEEE, MMMM dd, yyyy hh:mm:ss a"));
-            reminderTicks = tickets.getNode("reminder-ticks").getInt(6000);
-            creationDelay = tickets.getNode("creation-delay-seconds").getInt(60);
+            CommentedConfigurationNode tickets = getNodeAndComment(root, "Tickets settings and configurations", "tickets");
+            messageFormat = Utilities.formatColours(getNodeAndComment(tickets, "The format for general messages in tickets.", "format", "message").getString("&3[DS -> %OTHER%] &b%PLAYERNAME%: &f%MESSAGE%"));
+            sayIntoFormat = Utilities.formatColours(getNodeAndComment(tickets, "The format for when an admin speaks into a ticket.", "format", "say-into").getString("&3[DS Admin] &b%PLAYERNAME%: &f%MESSAGE%"));
+            dateFormat = new SimpleDateFormat(getNodeAndComment(tickets,
+                    "The date format, based off of SimpleDateFormat." +
+                            "\n Visit http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html for more information.", "format", "date").getString("EEEE, MMMM dd, yyyy hh:mm:ss a"));
+            reminderTicks = getNodeAndComment(tickets, "The delay, in ticks, between reminding helpers of active tickets.", "reminder-ticks").getInt(6000);
+            creationDelay = getNodeAndComment(tickets, "The delay, in seconds, that a user must wait before creating another ticket.", "creation-delay-seconds").getInt(60);
 
             allowCreationNoAdmins = tickets.getNode("settings", "allow-no-admin-creation").getBoolean(false);
 
@@ -56,5 +58,21 @@ public class Config {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public CommentedConfigurationNode getNodeAndComment(boolean last, CommentedConfigurationNode root, String comment, Object... path) {
+        CommentedConfigurationNode node = root.getNode(path);
+
+        if (last) {
+            node.setComment(comment);
+        } else {
+            node.setComment(null);
+        }
+
+        return node;
+    }
+
+    public CommentedConfigurationNode getNodeAndComment(CommentedConfigurationNode root, String comment, Object... path) {
+        return getNodeAndComment(true, root, comment, path);
     }
  }
